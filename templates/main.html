@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type=text/javascript src="{{
+        url_for('static', filename='jquery.min.js') }}">$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script> -->
+    <title>MODBUS通訊測試</title>
+</head>
+
+<body>
+    <form>
+        <label for="bandrate">鮑率</label>
+        <select id="bandrate" name="bandrate">
+            <option>9600</option>
+            <option>19200</option>
+        </select>
+        <label for="data_bit">資料位元</label>
+        <select id="data_bit" name="data_bit">
+            <option>7</option>
+            <option>8</option>
+        </select>
+        <label for="parity">同位元檢查</label>
+        <select id="parity" name="parity">
+            <option>None</option>
+            <option>Even</option>
+            <option>Odd</option>
+        </select>
+        <label for="stop_bit">停止位元</label>
+        <select id="stop_bit" name="stop_bit">
+            <option>1</option>
+            <option>2</option>
+        </select>
+        <br />
+        <label for="id">通訊位址</label>
+        <input type="text" id="id" name="id" />
+        <label for="address">暫存器位址</label>
+        <input type="text" id="address" name="address" />
+        <label for="qty">長度</label>
+        <input type="text" id="qty" name="qty" />
+    </form>
+    <br />
+    <label>間隔時間</label><input type="number" id="interval" /><label>ms</label>
+    <button id="start_comm" onclick="ChangeDisable(1)">開始通訊</button>
+    <button id="stop_comm" onclick="ChangeDisable(2)" disabled="true">結束通訊</button>
+    <script>
+        function ChangeDisable(value) {
+
+            if (value == 1) {
+                document.getElementById("stop_comm").disabled = false;
+                document.getElementById("start_comm").disabled = true;
+            }
+
+            else if (value == 2) {
+                document.getElementById("start_comm").disabled = false;
+                document.getElementById("stop_comm").disabled = true;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
