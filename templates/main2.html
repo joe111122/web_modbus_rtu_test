@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <form>
+    <form id="comm_para">
         <label for="bandrate">鮑率</label>
         <select id="bandrate" name="bandrate">
             <option>9600</option>
@@ -43,6 +43,7 @@
         <input type="text" id="qty" name="qty" />
     </form>
     <br />
+    <button id="setup">設定完成</button>
     <label for="interval">間隔時間</label><input type="text" id="interval" /><label>ms</label>
     <button id="start_comm">開始通訊</button>
     <button id="stop_comm" disabled="true">結束通訊</button>
@@ -51,15 +52,25 @@
     <script>
         let i = 0;
         let timer;
-        let timeOut=parseInt(document.querySelector('#interval').value);
         const displayPara = document.querySelector('#show');
         function count() {
             let counter = Math.floor(i);
             displayPara.textContent = counter;
             i++;
         }
+        const btnSetup = document.querySelector('#setup');
         const btnStart = document.querySelector('#start_comm');
         const btnStop = document.querySelector('#stop_comm');
+        btnSetup.addEventListener('click', () => {
+            var objForm = document.querySelector('#comm_para');
+            var formData = new FormData(objForm);
+            var objData = {};
+            formData.forEach((value, key) => {
+                objData[key] = value;
+            });
+            var json = JSON.stringify(objData);
+            displayPara.textContent = json;
+        })
         btnStart.addEventListener('click', () => {
             timer = setInterval(count, document.querySelector('#interval').value);
             btnStart.disabled = true;
@@ -70,6 +81,7 @@
             btnStart.disabled = false;
             btnStop.disabled = true;
         });
+
     </script>
 </body>
 
