@@ -52,11 +52,12 @@
     <script>
         let i = 0;
         let timer;
+        let json;
         const displayPara = document.querySelector('#show');
         function count() {
-            let counter = Math.floor(i);
-            displayPara.textContent = counter;
-            i++;
+            // let counter = Math.floor(i);
+            // displayPara.textContent = counter;
+            // i++;
         }
         const btnSetup = document.querySelector('#setup');
         const btnStart = document.querySelector('#start_comm');
@@ -68,7 +69,7 @@
             formData.forEach((value, key) => {
                 objData[key] = value;
             });
-            var json = JSON.stringify(objData);
+            json = JSON.stringify(objData);
             displayPara.textContent = json;
         })
         btnStart.addEventListener('click', () => {
