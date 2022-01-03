@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script type=text/javascript src="{{
-        url_for('static', filename='jquery.min.js') }}">$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script> -->
+    <script type=text/javascript src="{{
+        url_for('static', filename='jquery.min.js') }}">$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
     <!-- <script src="../static/jquery.min.js"></script> -->
     <title>MODBUS通訊測試</title>
 </head>
@@ -55,17 +55,9 @@
         let json;
         const displayPara = document.querySelector('#show');
         function count() {
-            // let counter = Math.floor(i);
-            // displayPara.textContent = counter;
-            // i++;
-            // $.ajax({
-            //     type: 'POST',
-            //     url: "{{url_for('get_data')}}",
-            //     data: json,
-            //     success: (res_data) => {
-            //         displayPara.textContent = res_data;
-            //     }
-            // });
+            let counter = Math.floor(i);
+            displayPara.textContent = counter;
+            i++;
         }
         const btnSetup = document.querySelector('#setup');
         const btnStart = document.querySelector('#start_comm');

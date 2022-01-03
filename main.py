@@ -8,13 +8,14 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return "Hello"
+    
 
-
-@app.route("/get_data", methods=['GET', 'POST'])
-def getData():
-    if request.method == "POST":
+@app.route("/get_data", methods=['GET','POST'])
+def GetData():
+    if request.method=='POST':
         print(request.values)
-    return render_template("main2.html")
+    return render_template("main3.html")
+    
 
 
 if __name__ == "__main__":
