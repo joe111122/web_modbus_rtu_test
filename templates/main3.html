@@ -55,9 +55,17 @@
         let json;
         const displayPara = document.querySelector('#show');
         function count() {
-            let counter = Math.floor(i);
-            displayPara.textContent = counter;
-            i++;
+            // let counter = Math.floor(i);
+            // displayPara.textContent = counter;
+            // i++;
+            $.ajax({
+                type: 'POST',
+                url: $SCRIPT_ROOT + "/get_data",
+                data: json,
+                success: (res_data) => {
+                    displayPara.textContent = res_data;
+                }
+            });
         }
         const btnSetup = document.querySelector('#setup');
         const btnStart = document.querySelector('#start_comm');
