@@ -10,18 +10,20 @@ import logging
 # log.setLevel(logging.DEBUG)
 
 UNIT = 0x1
+DATA_TYPE = ModbusClientMixin.DATATYPE
 
 
 async def run_sync_client():
-    client = ModbusClient(port='COM2', framer=FramerType.RTU,
+    client = ModbusClient(port='COM10', framer=FramerType.RTU,
                           baudrate=9600, timeout=1)
-    client.connect()
-    rr = client.read_holding_registers(address=0x0, count=2, slave=UNIT)
+    await client.connect()
+    rr = await client.read_holding_registers(address=0x0, count=2, slave=UNIT)
     value = client.convert_from_registers(
-        rr, data_type=ModbusClientMixin.DATATYPE.FLOAT32, word_order="big")
-    for i in value:
-        print(i)
-    print(len(value))
+        rr.registers, data_type=DATA_TYPE.FLOAT32, word_order="big")
+    # for i in value:
+    #     print(i)
+    # print(len(value))
+    print(f"{value:0.2f}")
     time.sleep(0.5)
     client.close()
 
