@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="user-data-container"></div>
+    <template id="user-data-template">
+        <div>
+            <label>姓名</label>
+            <input type="text" class="user-name" name="user-name" />
+            <label>電話</label>
+            <input type="text" class="phone" name="phone" autocomplete="on" />
+        </div>
+    </template>
+    <button id="btnOk">確定</button>
+    <button id="btnAddUser">新增使用者</button>
+    <script>
+        const btnAddUser = document.getElementById("btnAddUser");
+        const btnOk = document.getElementById("btnOk");
+        const userDataContainer = document.getElementById("user-data-container");
+        const userTemplate = document.querySelector("#user-data-template");
+        let userCount = 0; // 用來計數並生成唯一的 ID
+
+        btnOk.addEventListener("click", (e) => {
+            const containerData = userDataContainer.querySelectorAll("div");
+            const data = [];
+            containerData.forEach(element => {
+                const userData = {
+                    name: element.querySelector(".user-name").value,
+                    phone: element.querySelector(".phone").value
+                };
+                data.push(userData);
+            });
+            console.log(data);
+        });
+
+        btnAddUser.addEventListener("click", (e) => {
+            userCount++;
+            const node = userTemplate.content.cloneNode(true);
+            // 取得模板中的 label 和 input 元素
+            const userNameLabel = node.querySelector("label:nth-of-type(1)");
+            const userNameInput = node.querySelector(".user-name");
+            const phoneLabel = node.querySelector("label:nth-of-type(2)");
+            const phoneInput = node.querySelector(".phone");
+            
+            // 生成唯一的 id
+            const userNameId = `user-name-${userCount}`;
+            const phoneId = `phone-${userCount}`;
+
+            // 將唯一的 id 設置給 input
+            userNameInput.id = userNameId;
+            phoneInput.id = phoneId;
+
+            // 將唯一的 id 設置給 label 的 for 屬性
+            userNameLabel.setAttribute("for", userNameId);
+            phoneLabel.setAttribute("for", phoneId);
+            document.getElementById("user-data-container").appendChild(node);
+        });
+    </script>
+</body>
+
+</html>

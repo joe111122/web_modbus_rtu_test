@@ -1,12 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <title>Web Modbus測試程式</title>
 </head>
+
 <body>
-    <h1>Hello</h1>
+    <fieldset id="comm_para">
+        <legend>通訊測試</legend>
+        <ul>
+            <li>
+                <span>鮑率</span>
+                <select id="baud_rate" name="baud_rate">
+                    <option>9600</option>
+                    <option>19200</option>
+                </select>
+            </li>
+            <li>
+                <span>資料位元數</span>
+                <select id="data_bits" name="data_bits">
+                    <option>7</option>
+                    <option>8</option>
+                </select>
+            </li>
+            <li>
+                <span>同位元檢查</span>
+                <select id="parity" name="parity">
+                    <option>None</option>
+                    <option>Odd</option>
+                    <option>Even</option>
+                </select>
+            </li>
+            <li>
+                <span>停止位元</span>
+                <select id="stop_bit" name="stop_bit">
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </li>
+        </ul>
+    </fieldset>
+    <div id="display"></div>
+    <div id="print_data">{{modbus_data}}</div>
+    <template></template>
+    <script src="/static/main.js"></script>
 </body>
+
 </html>
